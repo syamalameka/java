@@ -1,0 +1,9 @@
+public class Typeconversion {
+   public Typeconversion() {
+   }
+
+   public static void main(String[] var0) {
+      double var1 = 9.89;
+      int var3 = (int)var1;
+      System.out.println(var3);
+      System.out.println(var1);
