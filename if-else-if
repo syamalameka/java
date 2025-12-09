@@ -1,0 +1,11 @@
+String city = "HYD";
+       if(city == "MTR")
+       {
+        System.out.println("we can to go beach");
+       }
+       else if (city == "HYD"){
+        System.out.println("we cannot go to beach");
+       }
+       else{
+        System.out.println("we cant do anything");
+       }
