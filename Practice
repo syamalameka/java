@@ -1,0 +1,13 @@
+public class example{
+public static void main(String args[]){
+int a = 18;
+int b = 15;
+if( a>b){
+system.out.prinln("vote eligible");
+}
+else
+{
+System.out.prinln("cannot eligible");
+}
+}
+}
