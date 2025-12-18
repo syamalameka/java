@@ -1,0 +1,17 @@
+public class Controlstatements {
+public static void main(String[] args) {
+int a = 10;
+int b = 20;
+if(a == 10)
+{
+System.out.println("syamala");
+}
+if(b == 20)
+{
+System.out.println("rajesh");
+}
+else{
+System.out.println("there is no name");
+}
+}
+}
