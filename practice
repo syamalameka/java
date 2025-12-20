@@ -1,0 +1,58 @@
+import java.util.*;
+public class ContestRegistrationPercentage {
+    static class Result {
+        int contestId;
+        double percentage;
+
+        Result(int contestId, double percentage) {
+            this.contestId = contestId;
+            this.percentage = percentage;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        int totalUsers = 3;
+
+        int[][] register = {
+            {215, 6}, {209, 2}, {208, 2}, {210, 6},
+            {208, 6}, {209, 7}, {209, 6}, {215, 7},
+            {208, 7}, {210, 2}, {207, 2}, {210, 7}
+        };
+
+        Map<Integer, Set<Integer>> contestMap = new HashMap<>();
+
+        for (int[] row : register) {
+            int contestId = row[0];
+            int userId = row[1];
+
+            contestMap
+                .computeIfAbsent(contestId, k -> new HashSet<>())
+                .add(userId);
+        }
+
+        List<Result> results = new ArrayList<>();
+
+        for (Map.Entry<Integer, Set<Integer>> entry : contestMap.entrySet()) {
+            int contestId = entry.getKey();
+            int registeredUsers = entry.getValue().size();
+
+            double percentage = (registeredUsers * 100.0) / totalUsers;
+            percentage = Math.round(percentage * 100.0) / 100.0;
+
+            results.add(new Result(contestId, percentage));
+        }
+
+        results.sort((a, b) -> {
+            if (Double.compare(b.percentage, a.percentage) != 0) {
+                return Double.compare(b.percentage, a.percentage);
+            }
+            return Integer.compare(a.contestId, b.contestId);
+        });
+
+        for (Result r : results) {
+            System.out.println(r.contestId + " -> " + r.percentage);
+        }
+    }
+}
+
