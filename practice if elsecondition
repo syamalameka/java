@@ -1,0 +1,15 @@
+public class variables{
+public Static void main(String args[]){
+int a = 20;
+int b = 30;
+if(a<b){
+System.out.println("we can go to beach");
+}
+else if(a>b){
+System.out.println("we cannot do anything");
+}
+else{
+System.out.println("nothing to do")
+}
+}
+}
