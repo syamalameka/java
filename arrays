@@ -1,0 +1,6 @@
+public class Arrays {
+public static void main(String args[]){
+int a[]={33,44,55};
+System.out.println(a[1]);
+}
+}
