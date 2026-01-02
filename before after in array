@@ -1,0 +1,8 @@
+public class array{
+public static void main(String args[]){
+int a[]={33,44,66};
+System.out.println("Before " +a[0]);
+a[0]=122009;
+System.out.println("After " +a[0]);
+}
+}
