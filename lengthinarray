@@ -1,0 +1,7 @@
+public class Arrays {
+public static void main(String args[]){
+int a[]={33,44,55};
+int length = a.length;
+System.out.println("Length " +length);
+}
+}
