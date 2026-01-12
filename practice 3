@@ -1,0 +1,35 @@
+public class StringExample {
+    public static void main(String[] args) {
+
+        String s1 = "Hello";
+        String s2 = "World";
+
+        String result = s1 + " " + s2;
+        System.out.println("Concatenation: " + result);
+
+        System.out.println("Length: " + result.length());
+
+        System.out.println("Char at index 1: " + result.charAt(1));
+
+        System.out.println("Substring: " + result.substring(0, 5));
+
+        System.out.println("Equals: " + s1.equals("Hello"));
+        System.out.println("Ignore Case: " + s1.equalsIgnoreCase("hello"));
+
+        System.out.println("Uppercase: " + result.toUpperCase());
+        System.out.println("Lowercase: " + result.toLowerCase());
+
+        System.out.println("Replace: " + result.replace("World", "Java"));
+
+        System.out.println("Contains 'lo': " + result.contains("lo"));
+
+        String[] words = result.split(" ");
+        System.out.println("Split result:");
+        for (String word : words) {
+            System.out.println(word);
+        }
+
+        String s3 = "   Java String   ";
+        System.out.println("Trimmed: '" + s3.trim() + "'");
+    }
+}
