@@ -1,0 +1,63 @@
+import java.util.*;
+
+class RestaurantGrowth {
+
+    static class Record {
+        String visitedOn;
+        int amount;
+
+        Record(String visitedOn, int amount) {
+            this.visitedOn = visitedOn;
+            this.amount = amount;
+        }
+    }
+
+    public static void restaurantGrowth(List<Record> records) {
+
+        Map<String, Integer> dailyTotal = new TreeMap<>();
+        for (Record r : records) {
+            dailyTotal.put(
+                r.visitedOn,
+                dailyTotal.getOrDefault(r.visitedOn, 0) + r.amount
+            );
+        }
+
+        List<Map.Entry<String, Integer>> days =
+                new ArrayList<>(dailyTotal.entrySet());
+
+        int windowSum = 0;
+
+        for (int i = 0; i < days.size(); i++) {
+            windowSum += days.get(i).getValue();
+
+            if (i >= 7) {
+                windowSum -= days.get(i - 7).getValue();
+            }
+
+            if (i >= 6) {
+                double avg = windowSum / 7.0;
+                System.out.println(
+                    days.get(i).getKey() + " " +
+                    windowSum + " " +
+                    String.format("%.2f", avg)
+                );
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
+        List<Record> input = Arrays.asList(
+            new Record("2019-01-01", 10),
+            new Record("2019-01-02", 20),
+            new Record("2019-01-03", 30),
+            new Record("2019-01-04", 40),
+            new Record("2019-01-05", 50),
+            new Record("2019-01-06", 60),
+            new Record("2019-01-07", 70),
+            new Record("2019-01-08", 80)
+        );
+
+        restaurantGrowth(input);
+    }
+}
