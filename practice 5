@@ -1,0 +1,27 @@
+import java.util.*;
+
+class Solution {
+    public int[] mostFriends(int[][] requestAccepted) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int[] req : requestAccepted) {
+            int requester = req[0];
+            int accepter = req[1];
+
+            map.put(requester, map.getOrDefault(requester, 0) + 1);
+            map.put(accepter, map.getOrDefault(accepter, 0) + 1);
+        }
+
+        int maxId = 0;
+        int maxFriends = 0;
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getValue() > maxFriends) {
+                maxFriends = entry.getValue();
+                maxId = entry.getKey();
+            }
+        }
+
+        return new int[]{maxId, maxFriends};
+    }
+}
