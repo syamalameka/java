@@ -1,0 +1,50 @@
+import java.util.*;
+
+class Insurance {
+    int pid;
+    double tiv2015;
+    double tiv2016;
+    double lat;
+    double lon;
+
+    Insurance(int pid, double tiv2015, double tiv2016, double lat, double lon) {
+        this.pid = pid;
+        this.tiv2015 = tiv2015;
+        this.tiv2016 = tiv2016;
+        this.lat = lat;
+        this.lon = lon;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        List<Insurance> list = Arrays.asList(
+            new Insurance(1, 10, 5, 10, 10),
+            new Insurance(2, 20, 20, 20, 20),
+            new Insurance(3, 10, 30, 20, 20),
+            new Insurance(4, 10, 40, 40, 40)
+        );
+
+        Map<Double, Integer> tivCount = new HashMap<>();
+        for (Insurance i : list) {
+            tivCount.put(i.tiv2015, tivCount.getOrDefault(i.tiv2015, 0) + 1);
+        }
+
+        Map<String, Integer> locationCount = new HashMap<>();
+        for (Insurance i : list) {
+            String key = i.lat + "," + i.lon;
+            locationCount.put(key, locationCount.getOrDefault(key, 0) + 1);
+        }
+
+        double sum = 0;
+        for (Insurance i : list) {
+            String locKey = i.lat + "," + i.lon;
+            if (tivCount.get(i.tiv2015) > 1 && locationCount.get(locKey) == 1) {
+                sum += i.tiv2016;
+            }
+        }
+
+        System.out.printf("%.2f", sum);
+    }
+}
