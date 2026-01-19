@@ -1,0 +1,78 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int N = sc.nextInt();
+        Set<String> cities = new HashSet<>();
+        for (int i = 0; i < N; i++) {
+            cities.add(sc.next());
+        }
+
+        int M = sc.nextInt();
+        Map<String, Map<String, Integer>> roads = new HashMap<>();
+        for (int i = 0; i < M; i++) {
+            String from = sc.next();
+            String to = sc.next();
+            int dist = sc.nextInt();
+
+            roads.putIfAbsent(from, new HashMap<>());
+            roads.get(from).put(to, dist);
+        }
+
+        int T = sc.nextInt();
+        while (T-- > 0) {
+            int K = sc.nextInt();
+            String[] route = new String[K];
+            for (int i = 0; i < K; i++) {
+                route[i] = sc.next();
+            }
+
+            boolean error = false;
+            Set<String> visited = new HashSet<>();
+            int totalDistance = 0;
+
+            for (int i = 0; i < K; i++) {
+                if (!cities.contains(route[i])) {
+                    error = true;
+                    break;
+                }
+
+                if (i > 0 && route[i].equals(route[i - 1])) {
+                    error = true;
+                    break;
+                }
+
+                if (visited.contains(route[i])) {
+                    error = true;
+                    break;
+                }
+
+                visited.add(route[i]);
+
+                if (i > 0) {
+                    String from = route[i - 1];
+                    String to = route[i];
+                    if (!roads.containsKey(from) || !roads.get(from).containsKey(to)) {
+                        error = true;
+                        break;
+                    }
+                    totalDistance += roads.get(from).get(to);
+                }
+            }
+
+            if (K > 1 && route[0].equals(route[K - 1])) {
+                error = true;
+            }
+
+            if (error) {
+                System.out.println("ERROR");
+            } else {
+                System.out.println(totalDistance);
+            }
+        }
+
+        sc.close();
+    }
+}
