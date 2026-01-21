@@ -1,0 +1,21 @@
+class Solution {
+    public int[] minBitwiseArray(List<Integer> nums) {
+        int n = nums.size();
+        int[] ans = new int[n];
+
+        ans[0] = nums.get(0);
+
+        for (int i = 1; i < n - 1; i++) {
+            ans[i] = nums.get(i - 1) & nums.get(i);
+        }
+
+        ans[n - 1] = nums.get(n - 2);
+
+        for (int i = 0; i < n - 1; i++) {
+            int missing = nums.get(i) ^ (ans[i] | ans[i + 1]);
+            ans[i + 1] |= missing;
+        }
+
+        return ans;
+    }
+}
