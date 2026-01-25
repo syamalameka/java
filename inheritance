@@ -1,0 +1,19 @@
+class Inheritance {
+    public void syamala() {
+        System.out.println("syamala");
+    }
+}
+
+class Child extends Inheritance {
+    public void rajesh() {
+        System.out.println("for");
+    }
+}
+
+public class Main {
+    public static void main(String args[]) {
+        Child g = new Child();
+        g.rajesh();
+        g.syamala();
+    }
+}
