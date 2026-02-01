@@ -1,0 +1,17 @@
+class Main22{
+    public void displayInfo(){
+        System.out.println("I am an animal");
+    }
+}
+class dog extends Main22{
+    public void displayInfo(){
+        super.displayInfo();
+        System.out.println("Iam a dog");
+    }
+} 
+public class Main{
+    public static void main(String[] args){
+        dog d1 = new dog();
+        d1.displayInfo();
+    }
+}
