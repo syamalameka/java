@@ -1,0 +1,9 @@
+class data{
+    private String name;
+}
+public class Main22{
+    public static void main(String[] args){
+        data d = new data();
+        d.name = "syamala";
+    }
+}
