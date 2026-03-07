@@ -1,0 +1,38 @@
+class Solution {
+    public int minFlips(String s) {
+        int n = s.length();
+        String doubled = s + s;
+
+        int alt1 = 0; // pattern 010101
+        int alt2 = 0; // pattern 101010
+        int ans = Integer.MAX_VALUE;
+
+        int left = 0;
+
+        for (int right = 0; right < doubled.length(); right++) {
+
+            char expected1 = (right % 2 == 0) ? '0' : '1';
+            char expected2 = (right % 2 == 0) ? '1' : '0';
+
+            if (doubled.charAt(right) != expected1) alt1++;
+            if (doubled.charAt(right) != expected2) alt2++;
+
+            if (right - left + 1 > n) {
+
+                char leftExpected1 = (left % 2 == 0) ? '0' : '1';
+                char leftExpected2 = (left % 2 == 0) ? '1' : '0';
+
+                if (doubled.charAt(left) != leftExpected1) alt1--;
+                if (doubled.charAt(left) != leftExpected2) alt2--;
+
+                left++;
+            }
+
+            if (right - left + 1 == n) {
+                ans = Math.min(ans, Math.min(alt1, alt2));
+            }
+        }
+
+        return ans;
+    }
+}
