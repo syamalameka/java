@@ -1,0 +1,36 @@
+import java.util.*;
+
+class Solution {
+    public int[] solveQueries(int[] nums, int[] queries) {
+        int n = nums.length;
+
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            map.computeIfAbsent(nums[i], k -> new ArrayList<>()).add(i);
+        }
+
+        int[] res = new int[queries.length];
+
+        for (int q = 0; q < queries.length; q++) {
+            int i = queries[q];
+            List<Integer> list = map.get(nums[i]);
+
+            if (list.size() == 1) {
+                res[q] = -1;
+                continue;
+            }
+
+            int idx = Collections.binarySearch(list, i);
+
+            int left = (idx > 0) ? list.get(idx - 1) : list.get(list.size() - 1);
+            int right = (idx < list.size() - 1) ? list.get(idx + 1) : list.get(0);
+
+            int d1 = Math.min(Math.abs(i - left), n - Math.abs(i - left));
+            int d2 = Math.min(Math.abs(i - right), n - Math.abs(i - right));
+
+            res[q] = Math.min(d1, d2);
+        }
+
+        return res;
+    }
+}
