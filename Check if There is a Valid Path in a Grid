@@ -1,0 +1,51 @@
+import java.util.*;
+
+class Solution {
+    public boolean hasValidPath(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        
+        int[][] dirs = {{-1,0},{0,1},{1,0},{0,-1}};
+        
+        int[][] streets = {
+            {},
+            {1,3},    
+            {0,2},     
+            {3,2},     
+            {1,2},   
+            {3,0},    
+            {1,0}     
+        };
+        
+        boolean[][] visited = new boolean[m][n];
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[]{0,0});
+        visited[0][0] = true;
+        
+        while (!q.isEmpty()) {
+            int[] curr = q.poll();
+            int x = curr[0], y = curr[1];
+            
+            if (x == m - 1 && y == n - 1) return true;
+            
+            for (int dir : streets[grid[x][y]]) {
+                int nx = x + dirs[dir][0];
+                int ny = y + dirs[dir][1];
+                
+                if (nx < 0 || ny < 0 || nx >= m || ny >= n || visited[nx][ny]) 
+                    continue;
+                
+                int opposite = (dir + 2) % 4;
+                
+                for (int nextDir : streets[grid[nx][ny]]) {
+                    if (nextDir == opposite) {
+                        visited[nx][ny] = true;
+                        q.offer(new int[]{nx, ny});
+                        break;
+                    }
+                }
+            }
+        }
+        
+        return false;
+    }
+}
